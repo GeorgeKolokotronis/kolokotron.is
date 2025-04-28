@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>George Kolokotronis - Creator of Software</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="relative min-h-100svh bg-gradient-to-b text-white responsive-border full-height-flex">
+    <div>
+      <div class="space-y-2">
+        <div class="text-xl">
+          <div class="inline-block">
+            <span class="inline-flex items-center font-mono text-glow">
+              hey, i'm
+            </span>
+          </div>
+        </div>
+        <h1 class="text-4xl font-bold">
+          <div class="inline-block">
+            <span class="inline-flex items-center font-mono text-glow">
+              george kolokotronis
+            </span>
+          </div>
+        </h1>
+        <div class="text-xl mb-12">
+          <div class="inline-block">
+            <span class="inline-flex items-center font-mono text-glow">
+              <span class="text-gray-600">></span><span> </span>
+              <span id="typewriter-static"></span><span id="typewriter"></span>
+            </span>
+          </div>
+        </div>
+        <div class="mt-20 mb-12">
+          <div class="text-sm text-section">
+            <span class="text-gray-400">currently:</span>
+          </div>
+          <div class="text-lg mt-0 mb-12">
+            <div class="inline-block">
+              <span class="inline-flex items-center font-mono text-glow">
+                <span class="emoji">🎯</span>
+                something exciting...
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="mt-20 mb-12">
+          <div class="text-sm text-section">
+            <span class="text-gray-400">previously:</span>
+          </div>
+          <div class="job-history">
+            <div class="job-item" style="align-items: flex-start !important;">
+              <span class="job-title">co-founder/cto</span>
+              <div class="job-company-info" style="justify-content: flex-start !important;">
+                <span class="job-at">at</span><img src="https://www.google.com/s2/favicons?domain=voltquant.com&sz=64" class="filter-glow" alt="voltquant icon"><a href="https://voltquant.com" target="_blank" class="job-company">voltquant</a><button id="voltquant-info" class="info-button" aria-label="More info">(i)</button>
+              </div>
+            </div>
+            <div id="voltquant-extra" class="job-extra text-white !important">
+              <span class="text-gray-600">></span><span> </span>
+            </div>
+            <div id="voltquant-spacing" class="job-extra mb-8"></div>
+            <div class="job-item" style="align-items: flex-start !important;">
+              <span class="job-title">team lead</span>
+              <div class="job-company-info" style="justify-content: flex-start !important;">
+                <span class="job-at">at</span><img src="https://www.google.com/s2/favicons?domain=aws.amazon.com&sz=64" class="filter-glow" alt="aws icon"><a href="https://aws.amazon.com" target="_blank" class="job-company">amazon web services</a>
+              </div>
+            </div>
+            <div class="job-item" style="align-items: flex-start !important;">
+              <span class="job-title">data science rep</span>
+              <div class="job-company-info" style="justify-content: flex-start !important;">
+                <span class="job-at">at</span><img src="https://www.google.com/s2/favicons?domain=aws.amazon.com&sz=64" class="filter-glow" alt="aws icon"><a href="https://aws.amazon.com" target="_blank" class="job-company">amazon web services</a>
+              </div>
+            </div>
+            <div class="job-item" style="align-items: flex-start !important;">
+              <span class="job-title">mphil engineering</span>
+              <div class="job-company-info" style="justify-content: flex-start !important;">
+                <span class="job-at">at</span><img src="https://www.enterprise.cam.ac.uk/favicon.ico" class="filter-glow" alt="cambridge icon"><a href="https://www.cam.ac.uk" target="_blank" class="job-company">university of cambridge</a>
+              </div>
+            </div>
+            <div class="job-item" style="align-items: flex-start !important;">
+              <span class="job-title">beng engineering</span>
+              <div class="job-company-info" style="justify-content: flex-start !important;">
+                <span class="job-at">at</span><img src="https://www.google.com/s2/favicons?domain=lboro.ac.uk&sz=64" class="filter-glow" alt="lboro icon"><a href="https://www.lboro.ac.uk" target="_blank" class="job-company">loughborough university</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-20"></div>
+        <div class="mb-12 social-links-container">
+          <div class="flex-col social-links text-gray-400">
+            <a href="https://www.linkedin.com/in/george-kolokotronis/" target="_blank" class="social-link text-gray-400">
+              linkedin
+              <span class="arrow">↗</span>
+            </a>
+            <a href="https://x.com/kolokotron_is" target="_blank" class="social-link text-gray-400">
+              x
+              <span class="arrow">↗</span>
+            </a>
+            <a href="https://github.com/GeorgeKolokotronis" target="_blank" class="social-link text-gray-400">
+              github
+              <span class="arrow">↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+  <script>
+    // Expand/collapse VOLTQUANT info
+    document.addEventListener('DOMContentLoaded', function() {
+      const btn = document.getElementById('voltquant-info');
+      const extra = document.getElementById('voltquant-extra');
+      const spacing = document.getElementById('voltquant-spacing');
+      let currentAnimation = null;
+      let currentContent = '';
+      
+      if (btn && extra && spacing) {
+        // Ensure initial state is hidden
+        extra.classList.add('job-extra');
+        spacing.classList.add('job-extra');
+        extra.innerHTML = ''; // Clear initial content
+        
+        btn.addEventListener('click', function() {
+          const isHidden = extra.classList.contains('job-extra');
+          
+          // Clear any existing animation
+          if (currentAnimation) {
+            clearTimeout(currentAnimation);
+            currentAnimation = null;
+          }
+          
+          if (isHidden) {
+            extra.classList.remove('job-extra');
+            typeInfo(extra, function() {
+              currentAnimation = null;
+            });
+          } else {
+            untypeInfo(extra, function() {
+              currentAnimation = null;
+            });
+          }
+        });
+      }
+    });
+
+    function typeInfo(element, onComplete) {
+      const lines = [
+        "seed round: ~£400k from industry angels",
+        "safe note: ~£200k from <a href='https://founders.cam.ac.uk/wp-content/uploads/2024/05/Founders-Demo-Day-Book-2024_WEB.pdf' target='_blank' class='hover-underline-gray text-white !important'><span class='text-white !important'>cambridge enterprise</span></a>",
+        "grant: ~£330k from <a href='https://gtr.ukri.org/projects?ref=10110638' target='_blank' class='hover-underline-gray text-white !important'><span class='text-white !important'>innovateuk</span></a>",
+        "customers: <a href='https://www.current-news.co.uk/octopus-national-grid-team-up-for-grid-connection-solutions/' target='_blank' class='hover-underline-gray text-white !important'><span class='text-white !important'>national grid, octopus energy</span></a>, etc."
+      ];
+      
+      let lineIndex = 0;
+      let charIndex = 0;
+      let currentLine = '';
+      const NORMAL_SPEED = 30; // ms per character
+      const isSmallScreen = window.innerWidth < 509;
+
+      function formatLine(line, isLast = false) {
+        if (!isSmallScreen) {
+          return `<span class="text-gray-600">></span> ${line.replace(':', '<span class="text-gray-600">:</span>')}<br>`;
+        }
+        const colonIndex = line.indexOf(':');
+        const label = line.substring(0, colonIndex);
+        const content = line.substring(colonIndex + 1);
+        return `<div class="line-container"><span class="text-gray-600">></span> ${label}<span class="text-gray-600">:</span></div><div class="content-container">${content}</div>${!isLast ? '<br>' : ''}`;
+      }
+      
+      function typeLine() {
+        if (lineIndex < lines.length) {
+          const line = lines[lineIndex];
+          if (charIndex < line.length) {
+            // Check if we're at the start of a tag
+            if (line[charIndex] === '<') {
+              // Find the end of the tag
+              const tagEnd = line.indexOf('>', charIndex) + 1;
+              if (tagEnd > 0) {
+                // Add the entire tag at once
+                currentLine += line.substring(charIndex, tagEnd);
+                charIndex = tagEnd;
+              } else {
+                currentLine += line[charIndex];
+                charIndex++;
+              }
+            } else {
+              // Skip the colon as it will be added with styling
+              if (line[charIndex] === ':') {
+                charIndex++;
+              } else {
+                currentLine += line[charIndex];
+                charIndex++;
+              }
+            }
+            
+            const formattedLines = lines.slice(0, lineIndex).map((l, i) => 
+              formatLine(l, i === lines.length - 1)
+            ).join('');
+            
+            if (isSmallScreen) {
+              const colonIndex = line.indexOf(':');
+              if (charIndex <= colonIndex) {
+                // Still typing the label
+                element.innerHTML = formattedLines + 
+                  `<div class="line-container"><span class="text-gray-600">></span> ${currentLine}<span class="text-gray-600">:</span></div>`;
+              } else {
+                // Typing the content
+                const label = line.substring(0, colonIndex);
+                const partialContent = currentLine.substring(currentLine.length - (charIndex - colonIndex - 1));
+                element.innerHTML = formattedLines + 
+                  `<div class="line-container"><span class="text-gray-600">></span> ${label}<span class="text-gray-600">:</span></div>` +
+                  `<div class="content-container">${partialContent}</div>`;
+              }
+            } else {
+              const colonIndex = line.indexOf(':');
+              if (charIndex <= colonIndex) {
+                element.innerHTML = formattedLines + `<span class="text-gray-600">></span> ${currentLine}<span class="text-gray-600">:</span>`;
+              } else {
+                element.innerHTML = formattedLines + `<span class="text-gray-600">></span> ${line.substring(0, colonIndex)}<span class="text-gray-600">:</span>${currentLine.substring(colonIndex)}`;
+              }
+            }
+            
+            currentAnimation = setTimeout(typeLine, NORMAL_SPEED);
+          } else {
+            const formattedLines = lines.slice(0, lineIndex + 1).map((l, i) => 
+              formatLine(l, i === lines.length - 1)
+            ).join('');
+            
+            element.innerHTML = formattedLines;
+            lineIndex++;
+            charIndex = 0;
+            currentLine = '';
+            if (lineIndex === lines.length) {
+              document.getElementById('voltquant-spacing').classList.remove('job-extra');
+              if (onComplete) onComplete();
+            } else {
+              currentAnimation = setTimeout(typeLine, 200);
+            }
+          }
+        }
+      }
+      
+      typeLine();
+    }
+
+    function untypeInfo(element, onComplete) {
+      const isSmallScreen = window.innerWidth < 509;
+      let lines = [];
+      let currentHTML = element.innerHTML;
+      
+      // Parse the HTML content into lines
+      if (isSmallScreen) {
+        const containers = currentHTML.split('<br>').filter(l => l.trim());
+        lines = containers.map(container => {
+          const div = document.createElement('div');
+          div.innerHTML = container;
+          const lineContainer = div.querySelector('.line-container');
+          const contentContainer = div.querySelector('.content-container');
+          if (lineContainer && contentContainer) {
+            const label = lineContainer.textContent.replace('>', '').replace(':', '').trim();
+            const content = contentContainer.textContent.trim();
+            return { label, content, hasColon: true };
+          }
+          return container;
+        });
+      } else {
+        lines = currentHTML.split('<br>').filter(line => line.trim()).map(line => {
+          const div = document.createElement('div');
+          div.innerHTML = line;
+          const text = div.textContent.trim();
+          const colonIndex = text.indexOf(':');
+          if (colonIndex > -1) {
+            return {
+              label: text.substring(0, colonIndex).replace('>', '').trim(),
+              content: text.substring(colonIndex + 1).trim(),
+              hasColon: true
+            };
+          }
+          return text;
+        });
+      }
+      
+      let lineIndex = lines.length - 1;
+      let currentLine = lines[lineIndex];
+      let isRemovingContent = currentLine && typeof currentLine === 'object' && currentLine.content;
+      
+      function untypeLine() {
+        if (lineIndex >= 0) {
+          if (typeof currentLine === 'object') {
+            if (isRemovingContent && currentLine.content) {
+              currentLine.content = currentLine.content.slice(0, -1);
+              if (!currentLine.content) {
+                isRemovingContent = false;
+              }
+            } else if (currentLine.label) {
+              currentLine.label = currentLine.label.slice(0, -1);
+            }
+            
+            const formattedLines = lines.slice(0, lineIndex + 1).map((line, i) => {
+              if (typeof line === 'object') {
+                if (isSmallScreen) {
+                  return `<div class="line-container"><span class="text-gray-600">></span> ${line.label}${line.label && line.hasColon ? '<span class="text-gray-600">:</span>' : ''}</div>` +
+                         (line.content ? `<div class="content-container">${line.content}</div>` : '') +
+                         (i < lineIndex ? '<br>' : '');
+                } else {
+                  return `<span class="text-gray-600">></span> ${line.label}${line.label && line.hasColon ? '<span class="text-gray-600">:</span>' : ''}${line.content ? ' ' + line.content : ''}<br>`;
+                }
+              }
+              return line + '<br>';
+            }).join('');
+            
+            element.innerHTML = formattedLines;
+            
+            if (!currentLine.label && !isRemovingContent) {
+              lineIndex--;
+              if (lineIndex >= 0) {
+                currentLine = lines[lineIndex];
+                isRemovingContent = currentLine && typeof currentLine === 'object' && currentLine.content;
+              }
+            }
+          } else {
+            if (currentLine.length > 0) {
+              currentLine = currentLine.slice(0, -1);
+              lines[lineIndex] = currentLine;
+              element.innerHTML = lines.map(l => l + '<br>').join('');
+            } else {
+              lineIndex--;
+              if (lineIndex >= 0) {
+                currentLine = lines[lineIndex];
+                isRemovingContent = currentLine && typeof currentLine === 'object' && currentLine.content;
+              }
+            }
+          }
+          
+          if (lineIndex >= 0) {
+            currentAnimation = setTimeout(untypeLine, 20);
+          } else {
+            element.classList.add('job-extra');
+            document.getElementById('voltquant-spacing').classList.add('job-extra');
+            element.innerHTML = '';
+            if (onComplete) onComplete();
+          }
+        }
+      }
+      
+      document.getElementById('voltquant-spacing').classList.add('job-extra');
+      untypeLine();
+    }
+
+    // Add required CSS
+    const style = document.createElement('style');
+    style.textContent = `
+      .line-container {
+        margin-bottom: 2px;
+      }
+      .content-container {
+        margin-left: 16px;
+        margin-bottom: 12px;
+      }
+    `;
+    document.head.appendChild(style);
+
+    const words = [
+      "software",
+      "products",
+      "hardware",
+      "solutions",
+      "businesses"
+    ];
+    const staticPhrase = "creator of\u00A0";
+    const specialPhrase = "based in london";
+    const el = document.getElementById("typewriter");
+    const staticEl = document.getElementById("typewriter-static");
+    let wordIndex = 0;
+    let charIndex = 0;
+    let typing = true;
+    let inSpecial = true;
+    let typingStatic = false;
+    let deletingStatic = false;
+    let staticCharIndex = 0;
+
+    function typeLoop() {
+      if (inSpecial) {
+        staticEl.textContent = "";
+        if (typing) {
+          el.textContent = specialPhrase.slice(0, charIndex + 1);
+          charIndex++;
+          if (charIndex === specialPhrase.length) {
+            typing = false;
+            setTimeout(typeLoop, 1400);
+          } else {
+            setTimeout(typeLoop, 80);
+          }
+        } else {
+          el.textContent = specialPhrase.slice(0, charIndex - 1);
+          charIndex--;
+          if (charIndex === 0) {
+            typing = true;
+            inSpecial = false;
+            typingStatic = true;
+            staticCharIndex = 0;
+            wordIndex = 0;
+            setTimeout(typeLoop, 600);
+          } else {
+            setTimeout(typeLoop, 40);
+          }
+        }
+      } else if (typingStatic) {
+        staticEl.textContent = staticPhrase.slice(0, staticCharIndex + 1);
+        el.textContent = "";
+        staticCharIndex++;
+        if (staticCharIndex === staticPhrase.length) {
+          typingStatic = false;
+          charIndex = 0;
+          setTimeout(typeLoop, 200);
+        } else {
+          setTimeout(typeLoop, 60);
+        }
+      } else if (!deletingStatic) {
+        const currentWord = words[wordIndex];
+        if (typing) {
+          el.textContent = currentWord.slice(0, charIndex + 1);
+          charIndex++;
+          if (charIndex === currentWord.length) {
+            typing = false;
+            setTimeout(typeLoop, 1200);
+          } else {
+            setTimeout(typeLoop, 80);
+          }
+        } else {
+          el.textContent = currentWord.slice(0, charIndex - 1);
+          charIndex--;
+          if (charIndex === 0) {
+            typing = true;
+            wordIndex++;
+            if (wordIndex === words.length) {
+              deletingStatic = true;
+              setTimeout(typeLoop, 400);
+            } else {
+              setTimeout(typeLoop, 300);
+            }
+          } else {
+            setTimeout(typeLoop, 40);
+          }
+        }
+      } else if (deletingStatic) {
+        if (staticCharIndex > 0) {
+          staticCharIndex--;
+          staticEl.textContent = staticPhrase.slice(0, staticCharIndex);
+          setTimeout(typeLoop, 40);
+        } else {
+          deletingStatic = false;
+          inSpecial = true;
+          charIndex = 0;
+          typing = true;
+          setTimeout(typeLoop, 600);
+        }
+      }
+    }
+
+    typeLoop();
+  </script>
+</body>
+</html>

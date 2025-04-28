@@ -1,0 +1,567 @@
+:root {
+  --background: #050505;
+  --foreground: #fff;
+  --gray: #9ca3af;
+  --gray-dark: #4b5563;
+  --glow: 0 0 10px hsla(0,0%,100%,.2), 0 0 20px hsla(0,0%,100%,.1), 0 0 30px hsla(0,0%,100%,0);
+}
+
+/* Base styles */
+html, body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'SF Mono', 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  overflow-y: auto;
+}
+
+/* Layout */
+.relative { position: relative; }
+.min-h-100svh { min-height: 100svh; }
+.overflow-y-hidden { overflow-y: hidden; }
+.full-height-flex {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: space-between;
+}
+
+/* Background */
+.bg-gradient-to-b {
+  background: linear-gradient(to bottom, #050505 0%, #000 100%);
+}
+
+/* Typography */
+.text-white { color: #fff; }
+.text-gray-400 { color: var(--gray); }
+.text-gray-600 { color: var(--gray-dark); margin-right: 0.5rem; }
+.font-mono {
+  font-family: 'SF Mono', 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+}
+.font-bold { font-weight: bold; }
+.text-4xl { font-size: 2rem; line-height: 2.2rem; }
+.text-xl { font-size: 1.1rem; line-height: 1.5rem; }
+.text-lg { font-size: 1rem; line-height: 1.5rem; }
+.text-sm { font-size: 0.8rem; line-height: 1.1rem; }
+
+/* Effects */
+.text-glow {
+  text-shadow: var(--glow);
+}
+.filter-glow {
+  filter: drop-shadow(0 0 3px rgba(255,255,255,.2));
+  width: 16px !important;
+  height: 16px !important;
+}
+
+/* Letter animation */
+.letter {
+  display: inline-block;
+  width: 1ch;
+  text-align: center;
+  overflow: hidden;
+  transition: color 0.2s;
+  line-height: 1.2;
+  min-height: 1.2em;
+  cursor: default;
+}
+
+/* Flex utilities */
+.inline-flex { display: inline-flex; }
+.items-center { align-items: center; }
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.space-y-2 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.5rem; }
+
+/* Spacing */
+.mr-2 { margin-right: 0.5rem; }
+.mr-1 { margin-right: 0.25rem; }
+.mr-4 { margin-right: 1rem; }
+.ml-1 { margin-left: 0.25rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mb-8 { margin-bottom: 2rem; }
+.mb-12 { margin-bottom: 3rem; }
+.mb-16 { margin-bottom: 4rem; }
+
+/* Images */
+img.filter-glow, img.icon, img[alt$="icon"] {
+  width: 16px !important;
+  height: 16px !important;
+  min-width: 16px;
+  min-height: 16px;
+  max-width: 16px;
+  max-height: 16px;
+  object-fit: contain;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Links */
+.hover-underline-gray {
+  color: var(--gray) !important;
+  text-decoration: none !important;
+  transition: text-decoration 0.2s !important;
+  cursor: pointer !important;
+}
+.hover-underline-gray:hover {
+  text-decoration: underline !important;
+}
+
+/* Job history */
+.job-history {
+  margin-top: 0.5rem;
+}
+.job-item {
+  display: flex;
+  align-items: center;
+  margin-top: 0.25rem;
+}
+.job-title {
+  font-family: 'SF Mono', 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  text-shadow: var(--glow);
+}
+.job-at {
+  color: #888;
+  margin: 0 0.5rem;
+}
+.job-company {
+  color: #fff !important;
+  cursor: pointer !important;
+  margin-left: 0.5rem;
+  font-family: 'SF Mono', 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  text-shadow: var(--glow);
+  text-decoration: none;
+}
+.job-company:hover {
+  text-decoration: underline;
+}
+.job-extra {
+  display: none;
+  margin-left: 2.5em;
+  color: var(--gray) !important;
+  font-size: 0.95em;
+  max-width: 600px;
+  margin-top: 0.5rem;
+  line-height: 1.5;
+}
+
+.job-extra a {
+  color: var(--gray) !important;
+  text-decoration: none !important;
+  transition: none;
+  pointer-events: none;
+  cursor: default;
+}
+
+.job-extra a:hover {
+  text-decoration: none !important;
+}
+
+.info-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #aaa;
+  font-size: 1em;
+  line-height: 1;
+  vertical-align: middle;
+  margin-left: 0.25rem;
+}
+
+/* Social links */
+.social-links-container {
+  margin-top: 3rem;
+}
+.social-links {
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+.social-link {
+  color: var(--gray) !important;
+  text-decoration: none;
+  transition: text-decoration 0.2s, color 0.2s;
+  display: inline-flex;
+  align-items: center;
+  font-family: 'SF Mono', 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  text-shadow: var(--glow);
+  font-size: 0.8rem;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: text-decoration-color 0.2s;
+}
+.social-link:hover {
+  text-decoration-color: currentColor;
+}
+.arrow {
+  margin-left: 0.25rem;
+  color: var(--gray);
+}
+
+/* Emoji */
+.emoji {
+  font-size: 1em;
+  margin-right: 0.4em;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+/* Responsive border */
+.responsive-border {
+  padding-left: 10vw;
+  padding-top: 10vw;
+  padding-right: 32px;
+  padding-bottom: 5vw;
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .text-4xl { font-size: 1.3rem; }
+  .p-10vw { padding: 4vw; }
+}
+
+@media (max-width: 533px) {
+  .responsive-border {
+    padding-left: 15px !important;
+    padding-top: 20px !important;
+    padding-right: 15px !important;
+    padding-bottom: 15px !important;
+  }
+}
+
+@media (max-width: 475px) {
+  .job-item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    align-items: flex-start;
+  }
+  .job-title {
+    margin-bottom: 0.25rem;
+  }
+  .job-company-info {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    justify-content: flex-start;
+  }
+  .job-at {
+    margin: 0;
+  }
+  .job-company {
+    margin: 0;
+  }
+  .info-button {
+    margin: 0;
+  }
+}
+
+@media (max-width: 700px) {
+  .job-extra {
+    display: none;
+    margin-left: 0;
+    color: var(--gray) !important;
+    font-size: 0.95em;
+    max-width: 600px;
+    margin-top: 0.5rem;
+    line-height: 1.5;
+  }
+  .job-extra .line {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.5rem;
+  }
+  .job-extra .line:last-child {
+    margin-bottom: 0;
+  }
+  .job-extra .prompt {
+    color: var(--gray-dark);
+    margin-right: 0.5rem;
+  }
+  .job-extra .content {
+    margin-top: 0.25rem;
+  }
+}
+
+/* Utility for hiding scrollbars */
+::-webkit-scrollbar { display: none; }
+
+.pb-5vw { padding-bottom: 5vw; }
+.p-10vw { padding: 10vw; }
+.gap-0 { gap: 0; }
+
+.cursor-default {
+  cursor: default !important;
+}
+
+.hover\:underline:hover { text-decoration: underline; }
+
+.flex-col.social-links {
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+.social-link {
+  color: #fff;
+  text-decoration: none;
+  transition: text-decoration 0.2s, color 0.2s;
+}
+
+.social-link:hover {
+  text-decoration: underline;
+}
+
+.hover-underline-gray {
+  color: #aaa;
+  text-decoration: none;
+  transition: text-decoration 0.2s;
+  cursor: pointer;
+}
+.hover-underline-gray:hover {
+  text-decoration: underline;
+}
+
+.cursor-default {
+  cursor: default !important;
+}
+
+.job-company {
+  color: #fff !important;
+  cursor: pointer !important;
+}
+
+.job-company .letter {
+  cursor: pointer !important;
+}
+
+/* Text sections */
+.text-section {
+  margin-bottom: 0.5rem;
+}
+
+/* Spacing */
+.mt-20 { margin-top: 20px; }
+.mt-0 { margin-top: 0 !important; }
+
+/* Display */
+.inline-block { display: inline-block; }
+.inline-flex { display: inline-flex; }
+.items-center { align-items: center; }
+
+.flex-col { flex-direction: column; }
+.space-y-2 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.5rem; }
+
+.mr-2 { margin-right: 0.5rem; }
+.mr-1 { margin-right: 0.25rem; }
+.mr-4 { margin-right: 1rem; }
+.ml-1 { margin-left: 0.25rem; }
+.mb-8 { margin-bottom: 2rem; }
+.mb-12 { margin-bottom: 3rem; }
+.mb-16 { margin-bottom: 4rem; }
+
+.img-filter-glow, .img-icon, .img-alt-icon {
+  width: 16px !important;
+  height: 16px !important;
+  min-width: 16px;
+  min-height: 16px;
+  max-width: 16px;
+  max-height: 16px;
+  object-fit: contain;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.hover-underline-gray {
+  color: #aaa;
+  text-decoration: none;
+  transition: text-decoration 0.2s;
+  cursor: pointer;
+}
+.hover-underline-gray:hover {
+  text-decoration: underline;
+}
+
+.job-history {
+  margin-top: 0.5rem;
+}
+.job-item {
+  display: flex;
+  align-items: center;
+  margin-top: 0.25rem;
+}
+.job-title {
+  font-family: 'SF Mono', 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  text-shadow: var(--glow);
+}
+.job-at {
+  color: #888;
+  margin: 0 0.5rem;
+}
+.job-company {
+  color: #fff !important;
+  cursor: pointer !important;
+  margin-left: 0.5rem;
+  font-family: 'SF Mono', 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  text-shadow: var(--glow);
+  text-decoration: none;
+}
+.job-company:hover {
+  text-decoration: underline;
+}
+.job-extra {
+  display: none;
+  margin-left: 2.5em;
+  color: var(--gray) !important;
+  font-size: 0.95em;
+  max-width: 600px;
+  margin-top: 0.5rem;
+  line-height: 1.5;
+}
+
+.job-extra a {
+  color: var(--gray) !important;
+  text-decoration: none !important;
+  transition: none;
+  pointer-events: none;
+  cursor: default;
+}
+
+.job-extra a:hover {
+  text-decoration: none !important;
+}
+
+.info-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #aaa;
+  font-size: 1em;
+  line-height: 1;
+  vertical-align: middle;
+  margin-left: 0.25rem;
+}
+
+.social-links-container {
+  margin-top: 3rem;
+}
+.social-links {
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+.social-link {
+  color: var(--gray) !important;
+  text-decoration: none;
+  transition: text-decoration 0.2s, color 0.2s;
+  display: inline-flex;
+  align-items: center;
+  font-family: 'SF Mono', 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  text-shadow: var(--glow);
+  font-size: 0.8rem;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: text-decoration-color 0.2s;
+}
+.social-link:hover {
+  text-decoration-color: currentColor;
+}
+.arrow {
+  margin-left: 0.25rem;
+  color: var(--gray);
+}
+
+.emoji {
+  font-size: 1em;
+  margin-right: 0.4em;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.responsive-border {
+  padding-left: 10vw;
+  padding-top: 10vw;
+  padding-right: 32px;
+  padding-bottom: 5vw;
+}
+
+@media (max-width: 600px) {
+  .text-4xl { font-size: 1.3rem; }
+  .p-10vw { padding: 4vw; }
+}
+
+@media (max-width: 533px) {
+  .responsive-border {
+    padding-left: 15px !important;
+    padding-top: 20px !important;
+    padding-right: 15px !important;
+    padding-bottom: 15px !important;
+  }
+}
+
+/* Utility for hiding scrollbars */
+::-webkit-scrollbar { display: none; }
+
+.pb-5vw { padding-bottom: 5vw; }
+.p-10vw { padding: 10vw; }
+.gap-0 { gap: 0; }
+
+.cursor-default {
+  cursor: default !important;
+}
+
+.hover\:underline:hover { text-decoration: underline; }
+
+.flex-col.social-links {
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+.social-link {
+  color: #fff;
+  text-decoration: none;
+  transition: text-decoration 0.2s, color 0.2s;
+}
+
+.social-link:hover {
+  text-decoration: underline;
+}
+
+.hover-underline-gray {
+  color: #aaa;
+  text-decoration: none;
+  transition: text-decoration 0.2s;
+  cursor: pointer;
+}
+.hover-underline-gray:hover {
+  text-decoration: underline;
+}
+
+.cursor-default {
+  cursor: default !important;
+}
+
+.job-company {
+  color: #fff !important;
+  cursor: pointer !important;
+}
+
+.job-company .letter {
+  cursor: pointer !important;
+}
+
+.text-section {
+  margin-bottom: 0.5rem;
+} 
