@@ -366,21 +366,28 @@
     `;
     document.head.appendChild(style);
 
-    const words = [
-      "software",
-      "products",
-      "hardware",
-      "solutions",
-      "businesses"
+    // Removed staticPhrase and words; only specialPhrases will be used
+    const specialPhrases = [
+      "london coder",
+      "product maker",
+      "🚀🔥💡😎",
+      "daily shipper",
+      "user tester",
+      "bug slayer",
+      "merge master",
+      "📈📈📈📈",
+      "typescript on top",
+      "postgres below",
+      "react on left",
+      "next on right",
     ];
-    const staticPhrase = "creator of\u00A0";
-    const specialPhrase = "based in london";
     const el = document.getElementById("typewriter");
     const staticEl = document.getElementById("typewriter-static");
     let wordIndex = 0;
     let charIndex = 0;
     let typing = true;
     let inSpecial = true;
+    let specialIndex = 0;
     let typingStatic = false;
     let deletingStatic = false;
     let staticCharIndex = 0;
@@ -388,79 +395,35 @@
     function typeLoop() {
       if (inSpecial) {
         staticEl.textContent = "";
+        const currentSpecial = specialPhrases[specialIndex];
         if (typing) {
-          el.textContent = specialPhrase.slice(0, charIndex + 1);
+          el.textContent = currentSpecial.slice(0, charIndex + 1);
           charIndex++;
-          if (charIndex === specialPhrase.length) {
+          if (charIndex === currentSpecial.length) {
             typing = false;
             setTimeout(typeLoop, 1400);
           } else {
             setTimeout(typeLoop, 80);
           }
         } else {
-          el.textContent = specialPhrase.slice(0, charIndex - 1);
+          el.textContent = currentSpecial.slice(0, charIndex - 1);
           charIndex--;
           if (charIndex === 0) {
             typing = true;
             inSpecial = false;
-            typingStatic = true;
-            staticCharIndex = 0;
-            wordIndex = 0;
+            // skip static phrase and words rotation
+            specialIndex = (specialIndex + 1) % specialPhrases.length;
             setTimeout(typeLoop, 600);
           } else {
             setTimeout(typeLoop, 40);
           }
         }
-      } else if (typingStatic) {
-        staticEl.textContent = staticPhrase.slice(0, staticCharIndex + 1);
-        el.textContent = "";
-        staticCharIndex++;
-        if (staticCharIndex === staticPhrase.length) {
-          typingStatic = false;
-          charIndex = 0;
-          setTimeout(typeLoop, 200);
-        } else {
-          setTimeout(typeLoop, 60);
-        }
-      } else if (!deletingStatic) {
-        const currentWord = words[wordIndex];
-        if (typing) {
-          el.textContent = currentWord.slice(0, charIndex + 1);
-          charIndex++;
-          if (charIndex === currentWord.length) {
-            typing = false;
-            setTimeout(typeLoop, 1200);
-          } else {
-            setTimeout(typeLoop, 80);
-          }
-        } else {
-          el.textContent = currentWord.slice(0, charIndex - 1);
-          charIndex--;
-          if (charIndex === 0) {
-            typing = true;
-            wordIndex++;
-            if (wordIndex === words.length) {
-              deletingStatic = true;
-              setTimeout(typeLoop, 400);
-            } else {
-              setTimeout(typeLoop, 300);
-            }
-          } else {
-            setTimeout(typeLoop, 40);
-          }
-        }
-      } else if (deletingStatic) {
-        if (staticCharIndex > 0) {
-          staticCharIndex--;
-          staticEl.textContent = staticPhrase.slice(0, staticCharIndex);
-          setTimeout(typeLoop, 40);
-        } else {
-          deletingStatic = false;
-          inSpecial = true;
-          charIndex = 0;
-          typing = true;
-          setTimeout(typeLoop, 600);
-        }
+      } else {
+        // Immediately return to special phrases rotation
+        inSpecial = true;
+        charIndex = 0;
+        typing = true;
+        setTimeout(typeLoop, 600);
       }
     }
 
