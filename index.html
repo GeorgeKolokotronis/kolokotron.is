@@ -112,55 +112,24 @@
   </div>
   <script src="script.js"></script>
   <script>
-    // Expand/collapse VOLTQUANT info
     document.addEventListener('DOMContentLoaded', function() {
       const btn = document.getElementById('voltquant-info');
       const extra = document.getElementById('voltquant-extra');
       const spacing = document.getElementById('voltquant-spacing');
-      let currentAnimation = null;
-      let currentContent = '';
-      
-      if (btn && extra && spacing) {
-        // Ensure initial state is hidden
-        extra.classList.add('job-extra');
-        spacing.classList.add('job-extra');
-        extra.innerHTML = ''; // Clear initial content
-        
-        btn.addEventListener('click', function() {
-          const isHidden = extra.classList.contains('job-extra');
-          
-          // Clear any existing animation
-          if (currentAnimation) {
-            clearTimeout(currentAnimation);
-            currentAnimation = null;
-          }
-          
-          if (isHidden) {
-            extra.classList.remove('job-extra');
-            typeInfo(extra, function() {
-              currentAnimation = null;
-            });
-          } else {
-            untypeInfo(extra, function() {
-              currentAnimation = null;
-            });
-          }
-        });
-      }
-    });
-
-    function typeInfo(element, onComplete) {
       const lines = [
         "seed round: ~£400k from industry angels",
         "safe note: ~£200k from <a href='https://founders.cam.ac.uk/wp-content/uploads/2024/05/Founders-Demo-Day-Book-2024_WEB.pdf' target='_blank' class='hover-underline-gray text-white !important'><span class='text-white !important'>cambridge enterprise</span></a>",
         "grant: ~£330k from <a href='https://gtr.ukri.org/projects?ref=10110638#/tabOverview' target='_blank' class='hover-underline-gray text-white !important'><span class='text-white !important'>innovateuk</span></a>",
         "customers: <a href='https://www.current-news.co.uk/octopus-national-grid-team-up-for-grid-connection-solutions/' target='_blank' class='hover-underline-gray text-white !important'><span class='text-white !important'>national grid, octopus energy</span></a>, etc."
       ];
-      
-      let lineIndex = 0;
-      let charIndex = 0;
-      let currentLine = '';
-      const NORMAL_SPEED = 30; // ms per character
+      let animationState = {
+        mode: 'idle', // 'expanding', 'collapsing', 'idle'
+        lineIndex: 0,
+        charIndex: 0,
+        currentLine: '',
+        timeout: null
+      };
+      const NORMAL_SPEED = 30;
       const isSmallScreen = window.innerWidth < 509;
 
       function formatLine(line, isLast = false) {
@@ -172,186 +141,161 @@
         const content = line.substring(colonIndex + 1);
         return `<div class="line-container"><span class="text-gray-600">></span> ${label}<span class="text-gray-600">:</span></div><div class="content-container">${content}</div>${!isLast ? '<br>' : ''}`;
       }
-      
-      function typeLine() {
-        if (lineIndex < lines.length) {
-          const line = lines[lineIndex];
-          if (charIndex < line.length) {
-            // Check if we're at the start of a tag
-            if (line[charIndex] === '<') {
-              // Find the end of the tag
-              const tagEnd = line.indexOf('>', charIndex) + 1;
-              if (tagEnd > 0) {
-                // Add the entire tag at once
-                currentLine += line.substring(charIndex, tagEnd);
-                charIndex = tagEnd;
-              } else {
-                currentLine += line[charIndex];
-                charIndex++;
-              }
-            } else {
-              // Skip the colon as it will be added with styling
-              if (line[charIndex] === ':') {
-                charIndex++;
-              } else {
-                currentLine += line[charIndex];
-                charIndex++;
-              }
-            }
-            
-            const formattedLines = lines.slice(0, lineIndex).map((l, i) => 
-              formatLine(l, i === lines.length - 1)
-            ).join('');
-            
-            if (isSmallScreen) {
-              const colonIndex = line.indexOf(':');
-              if (charIndex <= colonIndex) {
-                // Still typing the label
-                element.innerHTML = formattedLines + 
-                  `<div class="line-container"><span class="text-gray-600">></span> ${currentLine}<span class="text-gray-600">:</span></div>`;
-              } else {
-                // Typing the content
-                const label = line.substring(0, colonIndex);
-                const partialContent = currentLine.substring(currentLine.length - (charIndex - colonIndex - 1));
-                element.innerHTML = formattedLines + 
-                  `<div class="line-container"><span class="text-gray-600">></span> ${label}<span class="text-gray-600">:</span></div>` +
-                  `<div class="content-container">${partialContent}</div>`;
-              }
-            } else {
-              const colonIndex = line.indexOf(':');
-              if (charIndex <= colonIndex) {
-                element.innerHTML = formattedLines + `<span class="text-gray-600">></span> ${currentLine}<span class="text-gray-600">:</span>`;
-              } else {
-                element.innerHTML = formattedLines + `<span class="text-gray-600">></span> ${line.substring(0, colonIndex)}<span class="text-gray-600">:</span>${currentLine.substring(colonIndex)}`;
-              }
-            }
-            
-            currentAnimation = setTimeout(typeLine, NORMAL_SPEED);
-          } else {
-            const formattedLines = lines.slice(0, lineIndex + 1).map((l, i) => 
-              formatLine(l, i === lines.length - 1)
-            ).join('');
-            
-            element.innerHTML = formattedLines;
-            lineIndex++;
-            charIndex = 0;
-            currentLine = '';
-            if (lineIndex === lines.length) {
-              document.getElementById('voltquant-spacing').classList.remove('job-extra');
-              if (onComplete) onComplete();
-            } else {
-              currentAnimation = setTimeout(typeLine, 200);
-            }
-          }
-        }
-      }
-      
-      typeLine();
-    }
 
-    function untypeInfo(element, onComplete) {
-      const isSmallScreen = window.innerWidth < 509;
-      let lines = [];
-      let currentHTML = element.innerHTML;
-      
-      // Parse the HTML content into lines
-      if (isSmallScreen) {
-        const containers = currentHTML.split('<br>').filter(l => l.trim());
-        lines = containers.map(container => {
-          const div = document.createElement('div');
-          div.innerHTML = container;
-          const lineContainer = div.querySelector('.line-container');
-          const contentContainer = div.querySelector('.content-container');
-          if (lineContainer && contentContainer) {
-            const label = lineContainer.textContent.replace('>', '').replace(':', '').trim();
-            const content = contentContainer.textContent.trim();
-            return { label, content, hasColon: true };
-          }
-          return container;
-        });
-      } else {
-        lines = currentHTML.split('<br>').filter(line => line.trim()).map(line => {
-          const div = document.createElement('div');
-          div.innerHTML = line;
-          const text = div.textContent.trim();
-          const colonIndex = text.indexOf(':');
-          if (colonIndex > -1) {
-            return {
-              label: text.substring(0, colonIndex).replace('>', '').trim(),
-              content: text.substring(colonIndex + 1).trim(),
-              hasColon: true
-            };
-          }
-          return text;
-        });
-      }
-      
-      let lineIndex = lines.length - 1;
-      let currentLine = lines[lineIndex];
-      let isRemovingContent = currentLine && typeof currentLine === 'object' && currentLine.content;
-      
-      function untypeLine() {
-        if (lineIndex >= 0) {
-          if (typeof currentLine === 'object') {
-            if (isRemovingContent && currentLine.content) {
-              currentLine.content = currentLine.content.slice(0, -1);
-              if (!currentLine.content) {
-                isRemovingContent = false;
+      function renderLines(element, uptoLine, uptoChar, direction) {
+        let html = '';
+        for (let i = 0; i < uptoLine; i++) {
+          html += formatLine(lines[i], i === lines.length - 1);
+        }
+        if (uptoLine < lines.length && uptoLine >= 0) {
+          const line = lines[uptoLine];
+          let partial = '';
+          let colonIndex = line.indexOf(':');
+          if (direction === 'expanding') {
+            // Typing forward
+            if (isSmallScreen) {
+              if (uptoChar <= colonIndex) {
+                partial = `<div class="line-container"><span class="text-gray-600">></span> ${line.substring(0, uptoChar)}<span class="text-gray-600">:</span></div>`;
+              } else {
+                partial = `<div class="line-container"><span class="text-gray-600">></span> ${line.substring(0, colonIndex)}<span class="text-gray-600">:</span></div>` +
+                  `<div class="content-container">${line.substring(colonIndex + 1, uptoChar)}</div>`;
               }
-            } else if (currentLine.label) {
-              currentLine.label = currentLine.label.slice(0, -1);
+            } else {
+              if (uptoChar <= colonIndex) {
+                partial = `<span class="text-gray-600">></span> ${line.substring(0, uptoChar)}<span class="text-gray-600">:</span>`;
+              } else {
+                partial = `<span class="text-gray-600">></span> ${line.substring(0, colonIndex)}<span class="text-gray-600">:</span>${line.substring(colonIndex + 1, uptoChar)}`;
+              }
             }
-            
-            const formattedLines = lines.slice(0, lineIndex + 1).map((line, i) => {
-              if (typeof line === 'object') {
-                if (isSmallScreen) {
-                  return `<div class="line-container"><span class="text-gray-600">></span> ${line.label}${line.label && line.hasColon ? '<span class="text-gray-600">:</span>' : ''}</div>` +
-                         (line.content ? `<div class="content-container">${line.content}</div>` : '') +
-                         (i < lineIndex ? '<br>' : '');
+          } else {
+            // Untyping backward
+            if (isSmallScreen) {
+              if (uptoChar <= colonIndex) {
+                partial = `<div class="line-container"><span class="text-gray-600">></span> ${line.substring(0, uptoChar)}<span class="text-gray-600">:</span></div>`;
+              } else {
+                partial = `<div class="line-container"><span class="text-gray-600">></span> ${line.substring(0, colonIndex)}<span class="text-gray-600">:</span></div>` +
+                  `<div class="content-container">${line.substring(colonIndex + 1, uptoChar)}</div>`;
+              }
+            } else {
+              if (uptoChar <= colonIndex) {
+                partial = `<span class="text-gray-600">></span> ${line.substring(0, uptoChar)}<span class="text-gray-600">:</span>`;
+              } else {
+                partial = `<span class="text-gray-600">></span> ${line.substring(0, colonIndex)}<span class="text-gray-600">:</span>${line.substring(colonIndex + 1, uptoChar)}`;
+              }
+            }
+          }
+          html += partial;
+        }
+        element.innerHTML = html;
+      }
+
+      function animate(element, spacing, direction) {
+        if (animationState.timeout) {
+          clearTimeout(animationState.timeout);
+        }
+        animationState.mode = direction;
+        function step() {
+          if (direction === 'expanding') {
+            if (animationState.lineIndex < lines.length) {
+              const line = lines[animationState.lineIndex];
+              if (animationState.charIndex < line.length) {
+                // If next char is '<', jump to end of tag
+                if (line[animationState.charIndex] === '<') {
+                  const tagEnd = line.indexOf('>', animationState.charIndex);
+                  if (tagEnd !== -1) {
+                    animationState.charIndex = tagEnd + 1;
+                  } else {
+                    animationState.charIndex++;
+                  }
                 } else {
-                  return `<span class="text-gray-600">></span> ${line.label}${line.label && line.hasColon ? '<span class="text-gray-600">:</span>' : ''}${line.content ? ' ' + line.content : ''}<br>`;
+                  animationState.charIndex++;
+                }
+                renderLines(element, animationState.lineIndex, animationState.charIndex, direction);
+                animationState.timeout = setTimeout(step, NORMAL_SPEED);
+              } else {
+                renderLines(element, animationState.lineIndex, line.length, direction);
+                animationState.lineIndex++;
+                animationState.charIndex = 0;
+                if (animationState.lineIndex === lines.length) {
+                  spacing.classList.remove('job-extra');
+                  animationState.mode = 'idle';
+                  return;
+                }
+                animationState.timeout = setTimeout(step, 200);
+              }
+            }
+          } else if (direction === 'collapsing') {
+            if (animationState.lineIndex > 0 || animationState.charIndex > 0) {
+              if (animationState.charIndex > 0) {
+                // If previous char is '>', jump back to start of tag
+                const line = lines[animationState.lineIndex];
+                if (line[animationState.charIndex - 1] === '>') {
+                  // Find the matching '<' backwards
+                  let tagStart = line.lastIndexOf('<', animationState.charIndex - 1);
+                  if (tagStart !== -1) {
+                    animationState.charIndex = tagStart;
+                  } else {
+                    animationState.charIndex--;
+                  }
+                } else {
+                  animationState.charIndex--;
+                }
+                renderLines(element, animationState.lineIndex, animationState.charIndex, direction);
+                animationState.timeout = setTimeout(step, 20);
+              } else {
+                animationState.lineIndex--;
+                if (animationState.lineIndex >= 0) {
+                  animationState.charIndex = lines[animationState.lineIndex].length;
+                  renderLines(element, animationState.lineIndex, animationState.charIndex, direction);
+                  animationState.timeout = setTimeout(step, 20);
                 }
               }
-              return line + '<br>';
-            }).join('');
-            
-            element.innerHTML = formattedLines;
-            
-            if (!currentLine.label && !isRemovingContent) {
-              lineIndex--;
-              if (lineIndex >= 0) {
-                currentLine = lines[lineIndex];
-                isRemovingContent = currentLine && typeof currentLine === 'object' && currentLine.content;
-              }
-            }
-          } else {
-            if (currentLine.length > 0) {
-              currentLine = currentLine.slice(0, -1);
-              lines[lineIndex] = currentLine;
-              element.innerHTML = lines.map(l => l + '<br>').join('');
             } else {
-              lineIndex--;
-              if (lineIndex >= 0) {
-                currentLine = lines[lineIndex];
-                isRemovingContent = currentLine && typeof currentLine === 'object' && currentLine.content;
-              }
+              element.classList.add('job-extra');
+              spacing.classList.add('job-extra');
+              element.innerHTML = '';
+              animationState.mode = 'idle';
+              return;
             }
-          }
-          
-          if (lineIndex >= 0) {
-            currentAnimation = setTimeout(untypeLine, 20);
-          } else {
-            element.classList.add('job-extra');
-            document.getElementById('voltquant-spacing').classList.add('job-extra');
-            element.innerHTML = '';
-            if (onComplete) onComplete();
           }
         }
+        step();
       }
-      
-      document.getElementById('voltquant-spacing').classList.add('job-extra');
-      untypeLine();
-    }
+
+      if (btn && extra && spacing) {
+        // Ensure initial state is hidden
+        extra.classList.add('job-extra');
+        spacing.classList.add('job-extra');
+        extra.innerHTML = '';
+        
+        btn.addEventListener('click', function() {
+          if (animationState.timeout) {
+            clearTimeout(animationState.timeout);
+            animationState.timeout = null;
+          }
+          if (animationState.mode === 'expanding') {
+            // Reverse to collapsing
+            animationState.mode = 'collapsing';
+            animate(extra, spacing, 'collapsing');
+          } else if (animationState.mode === 'collapsing') {
+            // Reverse to expanding
+            animationState.mode = 'expanding';
+            animate(extra, spacing, 'expanding');
+          } else if (extra.classList.contains('job-extra')) {
+            // Start expanding
+            animationState.lineIndex = 0;
+            animationState.charIndex = 0;
+            animate(extra, spacing, 'expanding');
+            extra.classList.remove('job-extra');
+          } else {
+            // Start collapsing
+            animationState.lineIndex = lines.length - 1;
+            animationState.charIndex = lines[lines.length - 1].length;
+            animate(extra, spacing, 'collapsing');
+          }
+        });
+      }
+    });
 
     // Add required CSS
     const style = document.createElement('style');
