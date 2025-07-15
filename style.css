@@ -566,4 +566,15 @@ img.filter-glow, img.icon, img[alt$="icon"] {
 
 .text-section {
   margin-bottom: 0.5rem;
+}
+
+/* Linked job title styling */
+a.job-title {
+  color: #fff !important;
+  text-decoration: none;
+  cursor: pointer;
+}
+a.job-title:hover {
+  text-decoration: underline;
+  text-decoration-color: #fff;
 } 
