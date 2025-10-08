@@ -28,8 +28,14 @@
             </span>
           </div>
         </h1>
-        <div class="text-xl mb-2">
+        <div class="text-lg mb-12">
           <div class="inline-block">
+            <span class="inline-flex items-center font-mono text-glow">
+              <a href="https://www.linkedin.com/in/george-kolokotronis/" target="_blank" class="social-link linkedin-color">
+                <img src="https://www.google.com/s2/favicons?domain=linkedin.com&sz=64" class="filter-glow mr-1" alt="linkedin icon">linkedin
+                <span class="arrow">↗</span>
+              </a>
+            </span>
           </div>
         </div>
         <div class="mt-20 mb-12">
@@ -42,19 +48,6 @@
                 <span class="emoji">🎯</span>
                 something exciting...
               </span>
-            </div>
-          </div>
-        </div>
-        <div class="mt-20 mb-12">
-          <div class="text-sm text-section">
-            <span class="text-gray-400">live projects:</span>
-          </div>
-          <div class="job-history">
-            <div class="job-item" style="align-items: flex-start !important;">
-              <a href="https://www.energydebrief.com" target="_blank" class="job-title">daily energy newsletter</a>
-              <div class="job-company-info" style="justify-content: flex-start !important;">
-                <span class="job-at">at</span><img src="https://www.google.com/s2/favicons?domain=www.energydebrief.com&sz=64" class="filter-glow" alt="energydebrief icon"><a href="https://www.energydebrief.com" target="_blank" class="job-company">energydebrief</a>
-              </div>
             </div>
           </div>
         </div>
@@ -99,13 +92,43 @@
             </div>
           </div>
         </div>
+        <div class="mt-20 mb-12">
+          <div class="text-sm text-section">
+            <span class="text-gray-400">live projects:</span>
+          </div>
+          <div class="job-history">
+            <div class="job-item" style="align-items: flex-start !important;">
+              <a href="https://www.energydebrief.com" target="_blank" class="job-title">daily energy newsletter</a>
+              <div class="job-company-info" style="justify-content: flex-start !important;">
+                <span class="job-at">at</span><img src="https://www.google.com/s2/favicons?domain=www.energydebrief.com&sz=64" class="filter-glow" alt="energydebrief icon"><a href="https://www.energydebrief.com" target="_blank" class="job-company">energydebrief</a>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="mt-20"></div>
-        <div class="mb-12 social-links-container">
-          <div class="flex-col social-links text-gray-400">
-            <a href="https://www.linkedin.com/in/george-kolokotronis/" target="_blank" class="social-link text-gray-400">
-              linkedin
-              <span class="arrow">↗</span>
-            </a>
+        <div class="text-sm mb-14">
+          <div class="inline-block">
+            <span class="inline-flex items-center font-mono text-gray-400">
+              <span id="current-date"></span>
+            </span>
+            <script>
+              // Update date immediately
+              (function() {
+                const now = new Date();
+                const day = now.getDate();
+                const monthNames = ['january', 'february', 'march', 'april', 'may', 'june', 
+                                  'july', 'august', 'september', 'october', 'november', 'december'];
+                const month = monthNames[now.getMonth()];
+                const year = now.getFullYear();
+                
+                const daySuffix = day === 1 || day === 21 || day === 31 ? 'st' :
+                                 day === 2 || day === 22 ? 'nd' :
+                                 day === 3 || day === 23 ? 'rd' : 'th';
+                
+                const dateString = `${day}${daySuffix} ${month} ${year}`;
+                document.getElementById('current-date').textContent = dateString;
+              })();
+            </script>
           </div>
         </div>
       </div>

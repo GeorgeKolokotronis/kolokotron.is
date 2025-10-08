@@ -577,4 +577,9 @@ a.job-title {
 a.job-title:hover {
   text-decoration: underline;
   text-decoration-color: #fff;
+}
+
+/* LinkedIn brand color */
+.linkedin-color {
+  color: #0084bf !important;
 } 
