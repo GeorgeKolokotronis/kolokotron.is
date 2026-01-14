@@ -582,4 +582,16 @@ a.job-title:hover {
 /* LinkedIn brand color */
 .linkedin-color {
   color: #0084bf !important;
+}
+
+/* Y Combinator orange color */
+.yc-link {
+  color: #ff8c00 !important;
+  margin-left: 0.5rem;
+  text-decoration: none;
+  font-family: 'SF Mono', 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  text-shadow: var(--glow);
+}
+.yc-link:hover {
+  text-decoration: underline;
 } 
