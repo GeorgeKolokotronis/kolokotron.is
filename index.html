@@ -1,286 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>George Kolokotronis</title>
-  <meta name="description" content="George Kolokotronis, co-founder/CTO at Squid (YC W26).">
-  <meta property="og:title" content="George Kolokotronis">
-  <meta property="og:description" content="co-founder/cto at squid (yc w26).">
-  <meta property="og:url" content="https://kolokotron.is">
-  <meta property="og:type" content="website">
-  <meta name="theme-color" content="#050505">
-  <link
-    rel="icon"
-    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>"
-  />
-  <link rel="stylesheet" href="style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>George Kolokotronis</title>
+<meta name="description" content="Engineer turned founder, building AI and software for the energy transition. Co-founder &amp; CTO at Squid (YC W26).">
+<meta property="og:title" content="George Kolokotronis">
+<meta property="og:description" content="Engineer turned founder, building AI and software for the energy transition.">
+<meta property="og:url" content="https://kolokotron.is">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#fcfcfc" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #fcfcfc; --fg: #171717; --muted: #737373; --faint: #a3a3a3; --line: #ececec; --sans: 'Geist', system-ui, -apple-system, sans-serif; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #0a0a0a; --fg: #ededed; --muted: #8f8f8f; --faint: #5a5a5a; --line: #1f1f1f; } }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body { background: var(--bg); color: var(--fg); font: 400 15px/1.7 var(--sans); -webkit-font-smoothing: antialiased; }
+  a { color: var(--fg); text-decoration: underline; text-decoration-color: var(--line); text-decoration-thickness: 1px; text-underline-offset: 3px; transition: text-decoration-color .15s; }
+  a:hover { text-decoration-color: var(--fg); }
+  main { max-width: 580px; margin: 0 auto; padding: 96px 20px 80px; }
+  img.i { width: 14px; height: 14px; border-radius: 3px; vertical-align: -2px; margin-right: 6px; }
+  a img.i { margin-right: 5px; }
+  a:has(.i) { white-space: nowrap; }  /* keep each icon glued to its name */
+
+  header h1 { font-weight: 500; font-size: 15px; margin: 0; }
+  header p { margin: 4px 0 0; color: var(--muted); }
+  header .links { margin-top: 14px; }
+  header .links .arr { color: var(--faint); }
+  .yc { color: #f26625; text-decoration-color: rgba(242,102,37,.35); }
+
+  h2 { font-weight: 500; font-size: 13px; color: var(--faint); margin: 56px 0 14px; }
+  ul.list { list-style: none; margin: 0; padding: 0; }
+  ul.list li { display: flex; align-items: baseline; gap: 12px; padding: 7px 0; }
+  ul.list .l { white-space: nowrap; }
+  ul.list .fill { flex: 1; border-bottom: 1px dotted var(--line); transform: translateY(-4px); min-width: 16px; }
+  ul.list .r { color: var(--muted); white-space: nowrap; text-align: right; }
+  .sub { color: var(--muted); margin: -2px 0 8px 20px; }
+  .sub[hidden] { display: none; }
+  .sub.open { opacity: 1; animation: reveal .25s ease; }
+  @keyframes reveal { from { opacity: 0; transform: translateY(-3px); } to { opacity: 1; transform: none; } }
+  .info {
+    display: inline-grid; place-items: center;
+    width: 22px; height: 22px; margin-left: 4px; padding: 0;
+    vertical-align: -5px;
+    color: var(--faint); background: none; border: 0; border-radius: 50%;
+    cursor: pointer; transition: color .15s, background-color .15s;
+  }
+  .info:hover { color: var(--fg); background: var(--line); }
+  .info:focus-visible { outline: 2px solid var(--fg); outline-offset: 1px; }
+  .info[aria-expanded="true"] { color: var(--fg); }
+  .info[aria-expanded="true"] circle:first-child { fill: currentColor; }
+  .info[aria-expanded="true"] .dot { fill: var(--bg); }
+  .info[aria-expanded="true"] .stem { stroke: var(--bg); }
+  .tagline { color: var(--muted); margin: -4px 0 4px 20px; }
+  .emoji.i { display: inline-block; width: auto; font-size: 13px; line-height: 1; margin-right: 6px; }
+
+
+  footer { margin-top: 72px; color: var(--muted); font-size: 15px; display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+  footer a { color: var(--muted); text-decoration: underline; text-decoration-color: currentColor; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+  footer a:hover { color: var(--fg); text-decoration-color: var(--fg); }
+
+  .fade > * { opacity: 0; animation: in .7s ease forwards; }
+  .fade > *:nth-child(2) { animation-delay: .08s; } .fade > *:nth-child(3) { animation-delay: .16s; } .fade > *:nth-child(4) { animation-delay: .24s; }
+  .fade > *:nth-child(5) { animation-delay: .32s; } .fade > *:nth-child(6) { animation-delay: .4s; } .fade > *:nth-child(7) { animation-delay: .48s; }
+  .fade > *:nth-child(8) { animation-delay: .56s; } .fade > *:nth-child(9) { animation-delay: .64s; } .fade > *:nth-child(n+10) { animation-delay: .72s; }
+  @keyframes in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .fade > * { animation: none; opacity: 1; } }
+  @media (max-width: 520px) {
+    main { padding-top: 56px; }
+    ul.list li { flex-wrap: wrap; gap: 0 12px; }
+    ul.list .fill { display: none; }
+    ul.list .r { flex-basis: 100%; text-align: left; white-space: normal; }
+  }
+</style>
 </head>
 <body>
-  <main class="page">
-    <header class="fade-in" style="--i:0">
-      <div class="greeting">hey, i'm</div>
-      <h1 class="name">george kolokotronis<span class="cursor" aria-hidden="true"></span></h1>
-      <div class="socials">
-        <a href="https://www.linkedin.com/in/george-kolokotronis/" target="_blank" rel="noopener" class="social-link">
-          <img src="https://www.google.com/s2/favicons?domain=linkedin.com&sz=64" class="icon" alt="linkedin icon">linkedin<span class="arrow">↗</span>
-        </a>
-      </div>
-    </header>
+<main class="fade">
+  <header>
+    <h1>George Kolokotronis</h1>
+    <p>Engineer turned founder, building AI and software for the energy transition.</p>
+    <p class="links"><a href="https://www.linkedin.com/in/george-kolokotronis/" target="_blank" rel="noopener"><img class="i" src="https://www.google.com/s2/favicons?domain=linkedin.com&sz=64" alt="">LinkedIn</a> <span class="arr">↗</span></p>
+  </header>
 
-    <section class="section fade-in" style="--i:1">
-      <div class="section-label">currently</div>
-        <div class="job-item">
-          <span class="job-title">co-founder/cto</span>
-          <span class="job-company-info"><span class="job-at">at</span><img src="https://www.google.com/s2/favicons?domain=squid.energy&sz=64" class="icon" alt="squid icon"><a href="https://www.squid.energy" target="_blank" rel="noopener" class="job-company">squid</a><a href="https://www.ycombinator.com/companies/squid" target="_blank" rel="noopener" class="yc-link">(yc w26)</a></span>
-        </div>
-    </section>
+  <h2>Currently</h2>
+  <ul class="list">
+    <li><span class="l">Co-founder &amp; CTO</span><span class="fill"></span><span class="r"><a href="https://www.squid.energy" target="_blank" rel="noopener"><img class="i" src="https://www.google.com/s2/favicons?domain=squid.energy&sz=64" alt="">Squid</a> <a class="yc" href="https://www.ycombinator.com/companies/squid" target="_blank" rel="noopener">(YC W26)</a><button class="info" aria-expanded="false" aria-controls="squid-more" aria-label="More about Squid" title="More about Squid"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.3"/><circle class="dot" cx="8" cy="4.9" r=".95" fill="currentColor"/><path class="stem" d="M8 7.2v4.3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></span></li>
+  </ul>
+  <div class="tagline">AI agents for power grid planning.</div>
+  <div class="sub" id="squid-more" hidden>
+    <div>Raised a few million from <a href="https://www.ycombinator.com" target="_blank" rel="noopener"><img class="i" src="https://www.google.com/s2/favicons?domain=ycombinator.com&sz=64" alt="">Y Combinator</a>, <a href="https://www.33east.vc" target="_blank" rel="noopener"><img class="i" src="https://www.google.com/s2/favicons?domain=33east.vc&sz=64" alt="">33East</a>, <a href="https://leapforward.vc" target="_blank" rel="noopener"><img class="i" src="https://www.google.com/s2/favicons?domain=leapforward.vc&sz=64" alt="">Leap Forward Ventures</a>, <a href="https://20vc.fund" target="_blank" rel="noopener"><img class="i" src="https://www.google.com/s2/favicons?domain=20vc.fund&sz=64" alt="">20VC</a>, <a href="https://angelinvest.ventures" target="_blank" rel="noopener"><img class="i" src="https://www.google.com/s2/favicons?domain=angelinvest.ventures&sz=64" alt="">Angel Invest</a>, <a href="https://www.energetik.vc" target="_blank" rel="noopener"><span class="i emoji" aria-hidden="true">🔗</span>Energetik Ventures</a>, <a href="https://a16z.com" target="_blank" rel="noopener"><img class="i" src="https://www.google.com/s2/favicons?domain=a16z.com&sz=64" alt="">a16z scouts</a> and angels.</div>
+    <div>Customers: <a href="https://www.nationalgrid.com" target="_blank" rel="noopener"><img class="i" src="https://www.google.com/s2/favicons?domain=nationalgrid.com&sz=64" alt="">National Grid</a>, <a href="https://www.northernpowergrid.com" target="_blank" rel="noopener"><span class="i emoji" aria-hidden="true">🔗</span>Northern Powergrid</a>.</div>
+  </div>
 
-    <section class="section fade-in" style="--i:2">
-      <div class="section-label">live projects</div>
-        <div class="job-item">
-          <a href="https://www.energydebrief.com" target="_blank" rel="noopener" class="job-title">daily energy newsletter</a>
-          <span class="job-company-info"><span class="job-at">at</span><img src="https://www.google.com/s2/favicons?domain=www.energydebrief.com&sz=64" class="icon" alt="energydebrief icon"><a href="https://www.energydebrief.com" target="_blank" rel="noopener" class="job-company">energydebrief</a></span>
-        </div>
-    </section>
+  <h2>Projects</h2>
+  <ul class="list">
+    <li><span class="l"><img class="i" src="https://www.google.com/s2/favicons?domain=www.energydebrief.com&sz=64" alt=""><a href="https://www.energydebrief.com" target="_blank" rel="noopener">Energy Debrief</a></span><span class="fill"></span><span class="r">daily newsletter on the energy transition</span></li>
+    <li><span class="l"><span class="i emoji" aria-hidden="true">🐻</span><a href="https://bearly.vc" target="_blank" rel="noopener">Bearly VC</a></span><span class="fill"></span><span class="r">small cheques via crowdfunding and secondaries</span></li>
+    <li><span class="l"><span class="i emoji" aria-hidden="true">🧬</span><a href="https://bodydebrief.com" target="_blank" rel="noopener">Body Debrief</a></span><span class="fill"></span><span class="r">longevity experiment: tracking how I age</span></li>
+  </ul>
 
-    <section class="section fade-in" style="--i:3">
-      <div class="section-label">previously</div>
-        <div class="job-item">
-          <span class="job-title">head of technology</span>
-          <span class="job-company-info"><span class="job-at">at</span><img src="https://www.google.com/s2/favicons?domain=octopus.energy&sz=64" class="icon" alt="octopus energy icon"><a href="https://octopus.energy" target="_blank" rel="noopener" class="job-company">octopus energy</a></span>
-        </div>
-        <div class="job-item">
-          <span class="job-title">senior software engineer</span>
-          <span class="job-company-info"><span class="job-at">at</span><img src="https://www.google.com/s2/favicons?domain=octopus.energy&sz=64" class="icon" alt="octopus energy icon"><a href="https://octopus.energy" target="_blank" rel="noopener" class="job-company">octopus energy</a></span>
-        </div>
-        <div class="job-item">
-          <span class="job-title">co-founder/cto</span>
-          <span class="job-company-info"><span class="job-at">at</span><img src="https://www.google.com/s2/favicons?domain=voltquant.com&sz=64" class="icon" alt="voltquant icon"><a href="https://voltquant.com" target="_blank" rel="noopener" class="job-company">voltquant</a><button id="voltquant-info" class="info-button" aria-label="More info about voltquant">(i)</button></span>
-        </div>
-        <div id="voltquant-extra" class="job-extra"></div>
-        <div id="voltquant-spacing" class="job-extra mb-8"></div>
-        <div class="job-item">
-          <span class="job-title">ai/data gtm lead</span>
-          <span class="job-company-info"><span class="job-at">at</span><img src="https://www.google.com/s2/favicons?domain=aws.amazon.com&sz=64" class="icon" alt="aws icon"><a href="https://aws.amazon.com" target="_blank" rel="noopener" class="job-company">amazon web services</a></span>
-        </div>
-        <div class="job-item">
-          <span class="job-title">ai/data gtm rep</span>
-          <span class="job-company-info"><span class="job-at">at</span><img src="https://www.google.com/s2/favicons?domain=aws.amazon.com&sz=64" class="icon" alt="aws icon"><a href="https://aws.amazon.com" target="_blank" rel="noopener" class="job-company">amazon web services</a></span>
-        </div>
-    </section>
+  <h2>Previously</h2>
+  <ul class="list">
+    <li><span class="l">Head of Technology</span><span class="fill"></span><span class="r"><a href="https://octopus.energy" target="_blank" rel="noopener"><img class="i" src="https://www.google.com/s2/favicons?domain=octopus.energy&sz=64" alt="">Octopus Energy</a></span></li>
+    <li><span class="l">Senior Software Engineer</span><span class="fill"></span><span class="r"><a href="https://octopus.energy" target="_blank" rel="noopener"><img class="i" src="https://www.google.com/s2/favicons?domain=octopus.energy&sz=64" alt="">Octopus Energy</a></span></li>
+    <li><span class="l">Co-founder &amp; CTO</span><span class="fill"></span><span class="r"><a href="https://voltquant.com" target="_blank" rel="noopener"><img class="i" src="https://www.google.com/s2/favicons?domain=voltquant.com&sz=64" alt="">Voltquant</a><button class="info" aria-expanded="false" aria-controls="vq-more" aria-label="More about Voltquant" title="More about Voltquant"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.3"/><circle class="dot" cx="8" cy="4.9" r=".95" fill="currentColor"/><path class="stem" d="M8 7.2v4.3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></span></li>
+  </ul>
+  <div class="sub" id="vq-more" hidden>
+    <div>Raised ~$1m from <a href="https://founders.cam.ac.uk/wp-content/uploads/2024/05/Founders-Demo-Day-Book-2024_WEB.pdf" target="_blank" rel="noopener"><img class="i" src="https://www.google.com/s2/favicons?domain=cam.ac.uk&sz=64" alt="">Cambridge Enterprise</a>, <a href="https://gtr.ukri.org/projects?ref=10110638#/tabOverview" target="_blank" rel="noopener"><img class="i" src="https://www.google.com/s2/favicons?domain=ukri.org&sz=64" alt="">InnovateUK</a> and angels.</div>
+    <div>Customers: <a href="https://www.current-news.co.uk/octopus-national-grid-team-up-for-grid-connection-solutions/" target="_blank" rel="noopener"><img class="i" src="https://www.google.com/s2/favicons?domain=nationalgrid.com&sz=64" alt="">National Grid</a>, <a href="https://www.current-news.co.uk/octopus-national-grid-team-up-for-grid-connection-solutions/" target="_blank" rel="noopener"><img class="i" src="https://www.google.com/s2/favicons?domain=octopus.energy&sz=64" alt="">Octopus Energy</a>, <a href="https://www.shell.co.uk/about-us/sustainability/people-and-communities/encouraging-enterprise/join-our-programme.html" target="_blank" rel="noopener"><img class="i" src="https://www.google.com/s2/favicons?domain=shell.co.uk&sz=64" alt="">Shell</a>.</div>
+  </div>
+  <ul class="list">
+    <li><span class="l">Growth / GTM Lead</span><span class="fill"></span><span class="r"><a href="https://aws.amazon.com" target="_blank" rel="noopener"><img class="i" src="https://www.google.com/s2/favicons?domain=aws.amazon.com&sz=64" alt="">Amazon Web Services</a></span></li>
+    <li><span class="l">Growth / GTM Rep</span><span class="fill"></span><span class="r"><a href="https://aws.amazon.com" target="_blank" rel="noopener"><img class="i" src="https://www.google.com/s2/favicons?domain=aws.amazon.com&sz=64" alt="">Amazon Web Services</a></span></li>
+  </ul>
 
-    <section class="section fade-in" style="--i:4">
-      <div class="section-label">education</div>
-        <div class="job-item">
-          <span class="job-title">mphil industrial engineering</span>
-          <span class="job-company-info"><span class="job-at">at</span><img src="https://www.google.com/s2/favicons?domain=cam.ac.uk&sz=64" class="icon" alt="cambridge icon"><a href="https://www.cam.ac.uk" target="_blank" rel="noopener" class="job-company">university of cambridge</a></span>
-        </div>
-        <div class="job-item">
-          <span class="job-title">beng electronic engineering</span>
-          <span class="job-company-info"><span class="job-at">at</span><img src="https://www.google.com/s2/favicons?domain=lboro.ac.uk&sz=64" class="icon" alt="lboro icon"><a href="https://www.lboro.ac.uk" target="_blank" rel="noopener" class="job-company">loughborough university</a></span>
-        </div>
-    </section>
+  <h2>Education</h2>
+  <ul class="list">
+    <li><span class="l">MPhil Industrial Engineering</span><span class="fill"></span><span class="r"><a href="https://www.cam.ac.uk" target="_blank" rel="noopener"><img class="i" src="https://www.google.com/s2/favicons?domain=cam.ac.uk&sz=64" alt="">University of Cambridge</a></span></li>
+    <li><span class="l">BEng Electronic Engineering</span><span class="fill"></span><span class="r"><a href="https://www.lboro.ac.uk" target="_blank" rel="noopener"><img class="i" src="https://www.google.com/s2/favicons?domain=lboro.ac.uk&sz=64" alt="">Loughborough University</a></span></li>
+  </ul>
 
-    <footer class="footer fade-in" style="--i:5">
-      last login: <span id="current-date"></span>
-    </footer>
-  </main>
+  <footer><a href="https://kolokotron.is">kolokotron.is</a><span id="today"></span></footer>
+</main>
+<script>
+// (i) toggles for squid / voltquant
+document.querySelectorAll('.info').forEach(btn => btn.addEventListener('click', () => {
+  const panel = document.getElementById(btn.getAttribute('aria-controls'));
+  const open = panel.hidden;
+  panel.hidden = !open;
+  panel.classList.toggle('open', open);
+  btn.setAttribute('aria-expanded', open);
+}));
 
-  <script>
-    (function() {
-      const now = new Date();
-      const days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
-      const months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
-      const pad = n => String(n).padStart(2, '0');
-      document.getElementById('current-date').textContent =
-        `${days[now.getDay()]} ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()} ${pad(now.getHours())}:${pad(now.getMinutes())}`;
-    })();
-
-    document.addEventListener('DOMContentLoaded', function() {
-      const btn = document.getElementById('voltquant-info');
-      const extra = document.getElementById('voltquant-extra');
-      const spacing = document.getElementById('voltquant-spacing');
-      const lines = [
-        "seed round: ~£400k from industry angels",
-        "safe note: ~£200k from <a href='https://founders.cam.ac.uk/wp-content/uploads/2024/05/Founders-Demo-Day-Book-2024_WEB.pdf' target='_blank' class='hover-underline-gray text-white !important'><span class='text-white !important'>cambridge enterprise</span></a>",
-        "grant: ~£330k from <a href='https://gtr.ukri.org/projects?ref=10110638#/tabOverview' target='_blank' class='hover-underline-gray text-white !important'><span class='text-white !important'>innovateuk</span></a>",
-        "customers: <a href='https://www.current-news.co.uk/octopus-national-grid-team-up-for-grid-connection-solutions/' target='_blank' class='hover-underline-gray text-white !important'><span class='text-white !important'>national grid, octopus energy</span></a>, etc."
-      ];
-      let animationState = {
-        mode: 'idle', // 'expanding', 'collapsing', 'idle'
-        lineIndex: 0,
-        charIndex: 0,
-        currentLine: '',
-        timeout: null
-      };
-      const NORMAL_SPEED = 30;
-      const isSmallScreen = window.innerWidth < 509;
-
-      function formatLine(line, isLast = false) {
-        if (!isSmallScreen) {
-          return `<span class="text-gray-600">></span> ${line.replace(':', '<span class="text-gray-600">:</span>')}<br>`;
-        }
-        const colonIndex = line.indexOf(':');
-        const label = line.substring(0, colonIndex);
-        const content = line.substring(colonIndex + 1);
-        return `<div class="line-container"><span class="text-gray-600">></span> ${label}<span class="text-gray-600">:</span></div><div class="content-container">${content}</div>${!isLast ? '<br>' : ''}`;
-      }
-
-      function renderLines(element, uptoLine, uptoChar, direction) {
-        let html = '';
-        for (let i = 0; i < uptoLine; i++) {
-          html += formatLine(lines[i], i === lines.length - 1);
-        }
-        if (uptoLine < lines.length && uptoLine >= 0) {
-          const line = lines[uptoLine];
-          let partial = '';
-          let colonIndex = line.indexOf(':');
-          if (direction === 'expanding') {
-            // Typing forward
-            if (isSmallScreen) {
-              if (uptoChar <= colonIndex) {
-                partial = `<div class="line-container"><span class="text-gray-600">></span> ${line.substring(0, uptoChar)}<span class="text-gray-600">:</span></div>`;
-              } else {
-                partial = `<div class="line-container"><span class="text-gray-600">></span> ${line.substring(0, colonIndex)}<span class="text-gray-600">:</span></div>` +
-                  `<div class="content-container">${line.substring(colonIndex + 1, uptoChar)}</div>`;
-              }
-            } else {
-              if (uptoChar <= colonIndex) {
-                partial = `<span class="text-gray-600">></span> ${line.substring(0, uptoChar)}<span class="text-gray-600">:</span>`;
-              } else {
-                partial = `<span class="text-gray-600">></span> ${line.substring(0, colonIndex)}<span class="text-gray-600">:</span>${line.substring(colonIndex + 1, uptoChar)}`;
-              }
-            }
-          } else {
-            // Untyping backward
-            if (isSmallScreen) {
-              if (uptoChar <= colonIndex) {
-                partial = `<div class="line-container"><span class="text-gray-600">></span> ${line.substring(0, uptoChar)}<span class="text-gray-600">:</span></div>`;
-              } else {
-                partial = `<div class="line-container"><span class="text-gray-600">></span> ${line.substring(0, colonIndex)}<span class="text-gray-600">:</span></div>` +
-                  `<div class="content-container">${line.substring(colonIndex + 1, uptoChar)}</div>`;
-              }
-            } else {
-              if (uptoChar <= colonIndex) {
-                partial = `<span class="text-gray-600">></span> ${line.substring(0, uptoChar)}<span class="text-gray-600">:</span>`;
-              } else {
-                partial = `<span class="text-gray-600">></span> ${line.substring(0, colonIndex)}<span class="text-gray-600">:</span>${line.substring(colonIndex + 1, uptoChar)}`;
-              }
-            }
-          }
-          html += partial;
-        }
-        element.innerHTML = html;
-      }
-
-      function animate(element, spacing, direction) {
-        if (animationState.timeout) {
-          clearTimeout(animationState.timeout);
-        }
-        animationState.mode = direction;
-        function step() {
-          if (direction === 'expanding') {
-            if (animationState.lineIndex < lines.length) {
-              const line = lines[animationState.lineIndex];
-              if (animationState.charIndex < line.length) {
-                // If next char is '<', jump to end of tag
-                if (line[animationState.charIndex] === '<') {
-                  const tagEnd = line.indexOf('>', animationState.charIndex);
-                  if (tagEnd !== -1) {
-                    animationState.charIndex = tagEnd + 1;
-                  } else {
-                    animationState.charIndex++;
-                  }
-                } else {
-                  animationState.charIndex++;
-                }
-                renderLines(element, animationState.lineIndex, animationState.charIndex, direction);
-                animationState.timeout = setTimeout(step, NORMAL_SPEED);
-              } else {
-                renderLines(element, animationState.lineIndex, line.length, direction);
-                animationState.lineIndex++;
-                animationState.charIndex = 0;
-                if (animationState.lineIndex === lines.length) {
-                  spacing.classList.remove('job-extra');
-                  animationState.mode = 'idle';
-                  return;
-                }
-                animationState.timeout = setTimeout(step, 200);
-              }
-            }
-          } else if (direction === 'collapsing') {
-            if (animationState.lineIndex > 0 || animationState.charIndex > 0) {
-              if (animationState.charIndex > 0) {
-                // If previous char is '>', jump back to start of tag
-                const line = lines[animationState.lineIndex];
-                if (line[animationState.charIndex - 1] === '>') {
-                  // Find the matching '<' backwards
-                  let tagStart = line.lastIndexOf('<', animationState.charIndex - 1);
-                  if (tagStart !== -1) {
-                    animationState.charIndex = tagStart;
-                  } else {
-                    animationState.charIndex--;
-                  }
-                } else {
-                  animationState.charIndex--;
-                }
-                renderLines(element, animationState.lineIndex, animationState.charIndex, direction);
-                animationState.timeout = setTimeout(step, 20);
-              } else {
-                animationState.lineIndex--;
-                if (animationState.lineIndex >= 0) {
-                  animationState.charIndex = lines[animationState.lineIndex].length;
-                  renderLines(element, animationState.lineIndex, animationState.charIndex, direction);
-                  animationState.timeout = setTimeout(step, 20);
-                }
-              }
-            } else {
-              element.classList.add('job-extra');
-              spacing.classList.add('job-extra');
-              element.innerHTML = '';
-              animationState.mode = 'idle';
-              return;
-            }
-          }
-        }
-        step();
-      }
-
-      if (btn && extra && spacing) {
-        // Ensure initial state is hidden
-        extra.classList.add('job-extra');
-        spacing.classList.add('job-extra');
-        extra.innerHTML = '';
-        
-        btn.addEventListener('click', function() {
-          if (animationState.timeout) {
-            clearTimeout(animationState.timeout);
-            animationState.timeout = null;
-          }
-          if (animationState.mode === 'expanding') {
-            // Reverse to collapsing
-            animationState.mode = 'collapsing';
-            animate(extra, spacing, 'collapsing');
-          } else if (animationState.mode === 'collapsing') {
-            // Reverse to expanding
-            animationState.mode = 'expanding';
-            animate(extra, spacing, 'expanding');
-          } else if (extra.classList.contains('job-extra')) {
-            // Start expanding
-            animationState.lineIndex = 0;
-            animationState.charIndex = 0;
-            animate(extra, spacing, 'expanding');
-            extra.classList.remove('job-extra');
-          } else {
-            // Start collapsing
-            animationState.lineIndex = lines.length - 1;
-            animationState.charIndex = lines[lines.length - 1].length;
-            animate(extra, spacing, 'collapsing');
-          }
-        });
-      }
-    });
-  </script>
+document.getElementById('today').textContent = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+</script>
 </body>
 </html>
