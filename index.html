@@ -58,6 +58,17 @@
   .info[aria-expanded="true"] .dot { fill: var(--bg); }
   .info[aria-expanded="true"] .stem { stroke: var(--bg); }
   .tagline { color: var(--muted); margin: -4px 0 4px 20px; }
+  /* private projects: padlock that unlocks on hover / focus / tap */
+  .padlock { position: relative; display: inline-grid; place-items: center; margin-left: 7px; color: var(--faint); vertical-align: -1px; cursor: help; outline: none; }
+  .padlock .shackle { transition: transform .25s ease; transform-origin: 11px 7px; }
+  .padlock:hover, .padlock:focus-visible, .padlock:focus { color: var(--fg); }
+  .padlock:hover .shackle, .padlock:focus .shackle { transform: translate(0, -1.5px) rotate(28deg); }
+  .padlock .tip {
+    position: absolute; left: 50%; bottom: calc(100% + 8px); transform: translate(-50%, 4px);
+    white-space: nowrap; font-size: 12px; line-height: 1.4; color: var(--bg); background: var(--fg);
+    padding: 3px 8px; border-radius: 6px; opacity: 0; pointer-events: none; transition: opacity .15s, transform .15s;
+  }
+  .padlock:hover .tip, .padlock:focus .tip { opacity: 1; transform: translate(-50%, 0); }
   .emoji.i { display: inline-block; width: auto; font-size: 13px; line-height: 1; margin-right: 6px; }
 
 
@@ -101,7 +112,8 @@
   <ul class="list">
     <li><span class="l"><img class="i" src="https://www.google.com/s2/favicons?domain=www.energydebrief.com&sz=64" alt=""><a href="https://www.energydebrief.com" target="_blank" rel="noopener">Energy Debrief</a></span><span class="fill"></span><span class="r">daily newsletter on the energy transition</span></li>
     <li><span class="l"><span class="i emoji" aria-hidden="true">🐻</span><a href="https://bearly.vc" target="_blank" rel="noopener">Bearly VC</a></span><span class="fill"></span><span class="r">small cheques via crowdfunding and secondaries</span></li>
-    <li><span class="l"><span class="i emoji" aria-hidden="true">🧬</span><a href="https://bodydebrief.com" target="_blank" rel="noopener">Body Debrief</a></span><span class="fill"></span><span class="r">longevity experiment: tracking how I age</span></li>
+    <li><span class="l"><span class="i emoji" aria-hidden="true">🧬</span><a href="https://bodydebrief.com" target="_blank" rel="noopener">Body Debrief</a><span class="padlock" tabindex="0" role="img" aria-label="Private: approval required"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path class="shackle" d="M5 7V5a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><rect x="3.2" y="7" width="9.6" height="7" rx="1.8" fill="currentColor"/></svg><span class="tip" aria-hidden="true">approval required</span></span></span><span class="fill"></span><span class="r">longevity experiment: tracking how I age</span></li>
+    <li><span class="l"><span class="i emoji" aria-hidden="true">🌍</span><a href="https://www.countrydebrief.com" target="_blank" rel="noopener">Country Debrief</a><span class="padlock" tabindex="0" role="img" aria-label="Private: approval required"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path class="shackle" d="M5 7V5a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><rect x="3.2" y="7" width="9.6" height="7" rx="1.8" fill="currentColor"/></svg><span class="tip" aria-hidden="true">approval required</span></span></span><span class="fill"></span><span class="r">visiting every country in the world</span></li>
   </ul>
 
   <h2>Previously</h2>
